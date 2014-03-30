@@ -26,7 +26,7 @@
     'description': "Allows a remote OpenERP server to send raw EPL commands to a local OpenERP server.",
     'author': 'RyePDX LLC',
     'website': ' http://ryepdx.com',
-    'depends': [],
+    'depends': ['web'],
     'data': [],
     'installable': True,
     'active': True
