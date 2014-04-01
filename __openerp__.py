@@ -28,6 +28,8 @@
     'website': ' http://ryepdx.com',
     'depends': ['web'],
     'data': [],
+    'js': ['static/js/main.js'],
+    'test': ['static/test/main.js'],
     'installable': True,
     'active': True
 }
