@@ -10,7 +10,17 @@ class PrintController(openerp.addons.web.http.Controller):
     _cp_path = '/printer_proxy'
 
     @openerp.addons.web.http.jsonrequest
-    def print_epl(self, request, printer_name='zebra_python_unittest', data=[], raw=False, test=False):
+    def output(self, request, format="epl2", **kwargs):
+        '''Print the passed-in data. Corresponds to "printer_proxy.print"'''
+
+        if format.lower() == "epl2":
+            return self.output_epl2(request, **kwargs)
+        return {'success': False, 'error': "Format '%s' not recognized" % format}
+
+
+    def output_epl2(self, request, printer_name='zebra_python_unittest', data=[], raw=False, test=False):
+        '''Print the passed-in EPL2 data.'''
+
         printer = zebra(printer_name)
         printer.setup(direct_thermal=True)
 

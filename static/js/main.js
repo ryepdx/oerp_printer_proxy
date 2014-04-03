@@ -34,16 +34,17 @@ openerp.printer_proxy = function (instance) {
             this.notifications[name].push(callback);
         },
 
-        // Convenience function for sending EPL commands to the local printer.
-        print_epl: function (data) {
-            return this.message("print_epl", {"printer_name": this.name, "data": data});
+        // Convenience function for sending commands to the local printer.
+        print: function (format, data) {
+            // I prefer the "print" verb, but Python won't allow it. So we use 'output' on the Python side.
+            return this.message("output", {"printer_name": this.name, "data": data, "format": format});
         }
     });
 
     // Client actions
-    instance.printer_proxy.print_epl = function (parent, action) {
+    instance.printer_proxy.print = function (parent, action) {
         var printer = new instance.printer_proxy.Printer({'name': action.params.printer_name});
-        printer.print_epl(action.params.data);
+        printer.print(action.params.format, action.params.data);
     }
-    instance.web.client_actions.add('printer_proxy.print_epl', "instance.printer_proxy.print_epl");
+    instance.web.client_actions.add('printer_proxy.print', "instance.printer_proxy.print");
 };
