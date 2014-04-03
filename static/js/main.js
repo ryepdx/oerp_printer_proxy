@@ -3,10 +3,9 @@ openerp.printer_proxy = function (instance) {
     instance.printer_proxy.Printer  = instance.web.Class.extend({
         init: function(options){
             options = options || {};
-            url = options.url || 'http://localhost:8069';
 
             this.connection = new instance.web.JsonRPC();
-            this.connection.setup(url);
+            this.connection.setup(options.url || 'http://localhost:8069');
             this.notifications = {};
         },
 
