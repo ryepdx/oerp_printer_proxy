@@ -4,6 +4,7 @@ openerp.printer_proxy = function (instance) {
         init: function(options){
             options = options || {};
 
+            this.name = options.name || 'zebra_python_unittest';
             this.connection = new instance.web.JsonRPC();
             this.connection.setup(options.url || 'http://localhost:8069');
             this.notifications = {};
@@ -35,7 +36,7 @@ openerp.printer_proxy = function (instance) {
 
         // Convenience function for sending EPL commands to the local printer.
         print_epl: function (data) {
-            return this.message("print_epl", {"data": data});
+            return this.message("print_epl", {"printer_name": this.name, "data": data});
         }
     });
 };
