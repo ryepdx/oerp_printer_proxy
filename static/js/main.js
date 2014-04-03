@@ -39,4 +39,11 @@ openerp.printer_proxy = function (instance) {
             return this.message("print_epl", {"printer_name": this.name, "data": data});
         }
     });
+
+    // Client actions
+    instance.printer_proxy.print_epl = function (parent, action) {
+        var printer = new instance.printer_proxy.Printer({'name': action.params.printer_name});
+        printer.print_epl(action.params.data);
+    }
+    instance.web.client_actions.add('printer_proxy.print_epl', "instance.printer_proxy.print_epl");
 };
