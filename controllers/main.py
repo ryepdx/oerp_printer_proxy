@@ -22,7 +22,6 @@ class PrintController(openerp.addons.web.http.Controller):
         '''Print the passed-in EPL2 data.'''
 
         printer = zebra(printer_name)
-        printer.setup(direct_thermal=True)
 
         for datum in data:
             if not raw:
