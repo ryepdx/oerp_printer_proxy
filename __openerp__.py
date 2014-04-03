@@ -20,10 +20,10 @@
 #
 ##############################################################################
 {
-    'name': 'EPL Printing Proxy',
+    'name': 'Printer Proxy',
     'version': '0.01',
     'category': 'Generic Modules/Others',
-    'description': "Allows a remote OpenERP server to send raw EPL commands to a local OpenERP server.",
+    'description': "Allows a remote OpenERP server to send print commands to a local OpenERP server.",
     'author': 'RyePDX LLC',
     'website': ' http://ryepdx.com',
     'depends': ['web'],

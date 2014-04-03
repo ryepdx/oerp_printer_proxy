@@ -1,4 +1,4 @@
-oerp_epl_proxy
+printer_proxy
 ==============
 
-A module designed to run on both a remote OpenERP server and a client-side OpenERP server, allowing the remote OpenERP server to send EPL commands to a printer attached to the client machine.
+An OpenERP module designed to run on both a remote server and a client-side server, allowing the remote OpenERP server to send commands to a printer attached to the client machine via JSON-RPC.

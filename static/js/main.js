@@ -1,6 +1,6 @@
-openerp.epl_proxy = function (instance) {
-    instance.epl_proxy = {};
-    instance.epl_proxy.ProxyDevice  = instance.web.Class.extend({
+openerp.printer_proxy = function (instance) {
+    instance.printer_proxy = {};
+    instance.printer_proxy.Printer  = instance.web.Class.extend({
         init: function(options){
             options = options || {};
             url = options.url || 'http://localhost:8069';
@@ -18,7 +18,7 @@ openerp.epl_proxy = function (instance) {
                 callbacks[i](params);
             }
 
-            this.connection.rpc('/epl_proxy/' + name, params || {}).done(function(result) {
+            this.connection.rpc('/printer_proxy/' + name, params || {}).done(function(result) {
                 ret.resolve(result);
             }).fail(function(error) {
                 ret.reject(error);
