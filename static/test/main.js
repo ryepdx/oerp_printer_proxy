@@ -4,7 +4,7 @@ openerp.testing.section('printing sanity check', function (test){
         var connection = new instance.web.JsonRPC();
         connection.setup('http://localhost:8069');
 
-        connection.rpc('/printer_proxy/print_epl', {data:"test"}).done(function(result) {
+        connection.rpc('/printer_proxy/print_epl', {data:["test"], raw: true}).done(function(result) {
             ok(result.success, "server returned without error")
             ret.resolve(result);
         }).fail(function(error) {
