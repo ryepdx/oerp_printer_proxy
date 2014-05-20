@@ -4,25 +4,51 @@ openerp.printer_proxy = function (instance) {
         init: function(options){
             options = options || {};
 
+            this.req_id = 1;
             this.name = options.name || 'zebra_python_unittest';
-            this.connection = new instance.web.JsonRPC();
-            this.connection.setup(options.url || 'http://localhost:8069');
+            this.url = (options.url || 'https://localhost:5001/api');
+            this.auth = {
+                username: "ryan",
+                password: "Password1"
+            };
             this.notifications = {};
         },
 
         // Makes a JSON-RPC call to the local OpenERP server.
-        message : function(name,params){
+        message : function(method,params){
             var ret = new $.Deferred();
+
             var callbacks = this.notifications[name] || [];
             for(var i = 0; i < callbacks.length; i++){
                 callbacks[i](params);
             }
 
-            this.connection.rpc('/printer_proxy/' + name, params || {}).done(function(result) {
-                ret.resolve(result);
-            }).fail(function(error) {
-                ret.reject(error);
+            var data = {
+                id: this.req_id,
+                jsonrpc: "2.0",
+                method: method,
+                params: params || {}
+            }
+
+            jQuery.ajax({
+              type: "POST",
+              url: this.url,
+              dataType: 'json',
+              contentType: "application/json",
+              async: true,
+              headers: {
+                "Authorization": "Basic " + btoa(this.auth.username + ":" + this.auth.password)
+              },
+              data: JSON.stringify(data),
+              success: function (response) {
+                  ret.resolve(response.result);
+              },
+              fail: function (response) {
+                  ret.reject(response.error);
+              }
             });
+            this.req_id++;
+
             return ret;
         },
 
