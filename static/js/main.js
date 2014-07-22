@@ -6,7 +6,7 @@ openerp.printer_proxy = function (instance) {
 
             this.req_id = 1;
             this.name = options.name || 'zebra_python_unittest';
-            this.url = (options.url || 'https://localhost:5001/api');
+            this.url = (options.url || 'https://localhost:8443/api');
             this.auth = {
                 username: "ryan",
                 password: "Password1"
