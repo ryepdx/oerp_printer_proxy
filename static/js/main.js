@@ -8,8 +8,8 @@ openerp.printer_proxy = function (instance) {
             this.name = options.name || 'zebra_python_unittest';
             this.url = options.url || 'https://127.0.0.1:8443/api';
             this.auth = {
-                username: options.username || "ryan",
-                password: options.password || "Password1"
+                username: options.username || "default_user",
+                password: options.password || "default_password"
             };
             this.notifications = {};
         },
