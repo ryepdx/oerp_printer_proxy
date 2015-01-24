@@ -6,10 +6,10 @@ openerp.printer_proxy = function (instance) {
 
             this.req_id = 1;
             this.name = options.name || 'zebra_python_unittest';
-            this.url = (options.url || 'https://localhost:8443/api');
+            this.url = options.url || 'https://127.0.0.1:8443/api';
             this.auth = {
-                username: "ryan",
-                password: "Password1"
+                username: options.username || "ryan",
+                password: options.password || "Password1"
             };
             this.notifications = {};
         },
@@ -39,6 +39,7 @@ openerp.printer_proxy = function (instance) {
               headers: {
                 "Authorization": "Basic " + btoa(this.auth.username + ":" + this.auth.password)
               },
+              crossDomain: true,
               data: JSON.stringify(data),
               success: function (response) {
                   ret.resolve(response.result);
@@ -69,7 +70,10 @@ openerp.printer_proxy = function (instance) {
 
     // Client actions
     instance.printer_proxy.print = function (parent, action) {
-        var printer = new instance.printer_proxy.Printer({'name': action.params.printer_name});
+        var printer = new instance.printer_proxy.Printer({
+            'name': action.params.printer_name, 'url': action.params.url,
+            'username': action.params.username, 'password': action.params.password
+        });
         printer.print(action.params.format, action.params.data);
     }
     instance.web.client_actions.add('printer_proxy.print', "instance.printer_proxy.print");
