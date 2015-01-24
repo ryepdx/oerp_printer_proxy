@@ -27,7 +27,7 @@
     'author': 'RyePDX LLC',
     'website': ' http://ryepdx.com',
     'depends': ['web'],
-    'data': [],
+    'data': ['company_view.xml'],
     'js': ['static/js/main.js'],
     'test': ['static/test/main.js'],
     'installable': True,

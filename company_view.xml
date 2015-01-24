@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<openerp>
+	<data>
+		<record id="company_printerproxy" model="ir.ui.view">
+			<field name="name">res.company.scaleproxy.config</field>
+			<field name="model">res.company</field>
+			<field name="inherit_id" ref="base.view_company_form"/>
+			<field name="arch" type="xml">
+				<xpath expr="//notebook/page[@string='Configuration']" position="inside">
+					<newline/>
+					<separator string="Printer Proxy Settings" colspan="4"/>
+					<newline/>
+                    <group colspan="4" col="4">
+                        <field name="printer_proxy_url" />
+                        <field name="printer_proxy_username" />
+                        <field name="printer_proxy_password" />
+                        <field name="printer_proxy_device_name" />
+                    </group>
+				</xpath>
+			</field>
+		</record>
+
+	</data>
+</openerp>
